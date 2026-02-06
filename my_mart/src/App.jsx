@@ -1,9 +1,14 @@
-function App() {
+// src/App.jsx
+import { Outlet } from "react-router-dom";
+import Header from "./components/Header";
+
+const App = () => {
   return (
     <>
-      <h1>hii</h1>
+      <Header />
+      <Outlet />
     </>
   );
-}
+};
 
 export default App;
