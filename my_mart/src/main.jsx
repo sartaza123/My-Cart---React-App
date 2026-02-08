@@ -3,13 +3,14 @@ import React from "react";
 import { createRoot } from "react-dom/client";
 import { createBrowserRouter, RouterProvider } from "react-router-dom";
 
+import "./index.css";
+
 import App from "./App";
 import Home from "./pages/Home";
 import Account from "./pages/Account";
 import Menu from "./pages/Menu";
 import Cart from "./pages/Cart";
-
-import "./index.css";
+import Details from "./components/ProductDetails";
 
 const router = createBrowserRouter([
   {
@@ -20,6 +21,7 @@ const router = createBrowserRouter([
       { path: "account", element: <Account /> },
       { path: "menu", element: <Menu /> },
       { path: "cart", element: <Cart /> },
+      { path: "/details/:id", element: <Details /> },
     ],
   },
 ]);
