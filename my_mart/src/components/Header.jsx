@@ -26,7 +26,7 @@ const Header = () => {
       <div className="max-w-7xl mx-auto px-6 py-4 flex items-center justify-between">
         {/* Brand */}
         <h1 className="text-2xl font-semibold tracking-wide text-white">
-          my<span className="text-[#f9b17a]">_</span>mart
+          My<span className="text-[#f9b17a]">_</span>mart
         </h1>
 
         {/* Navigation */}

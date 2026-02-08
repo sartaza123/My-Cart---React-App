@@ -28,7 +28,7 @@ const ProductCard = ({ product }) => {
 
         {/* Add to cart overlay */}
         <div className="absolute bottom-0 left-0 right-0 translate-y-full group-hover:translate-y-0 transition-all duration-300">
-          <button className="w-full py-3 bg-gradient-to-r from-[#1b1f3b] via-[#23284f] to-[#1b1f3b] text-white flex items-center justify-center gap-2 hover:opacity-95">
+          <button className="w-full py-3 bg-gradient-to-r from-[#1b1f3b] via-[#23284f] to-[#1b1f3b] text-white flex items-center justify-center gap-2 opacity-95 hover:opacity-100">
             <FiShoppingCart />
             Add to cart
           </button>
@@ -36,7 +36,7 @@ const ProductCard = ({ product }) => {
       </div>
 
       {/* Product info */}
-      <div className="p-4 text-center">
+      <div className="p-4 text-center bg-white">
         <p className="text-xs text-gray-500 mb-1 capitalize">
           {product.category}
         </p>
