@@ -22,7 +22,7 @@ const Header = () => {
   `;
 
   return (
-    <header className="sticky top-0 z-50 bg-linear-to-r from-[#1b1f3b] via-[#23284f] to-[#1b1f3b] border-b border-white/5">
+    <header className="sticky top-0 z-50 bg-linear-to-r from-[#1b1f3b] via-[#23284f] to-[#1b1f3b]">
       <div className="max-w-7xl mx-auto px-6 py-4 flex items-center justify-between">
         {/* Brand */}
         <h1 className="text-2xl font-semibold tracking-wide text-white">
