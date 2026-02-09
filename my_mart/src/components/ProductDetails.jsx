@@ -116,9 +116,9 @@ function Details() {
           </ul>
 
           {/* Quantity */}
-          <div className="flex items-center gap-4 mt-6">
-            <span className="text-sm font-medium">Quantity:</span>
-            <div className="flex border">
+          <div className="flex items-center gap-3 mt-4">
+            <span className="text-sm font-medium">Qty</span>
+            <div className="flex border rounded overflow-hidden">
               <button
                 onClick={() => qty > 1 && setQty(qty - 1)}
                 className="px-3"
