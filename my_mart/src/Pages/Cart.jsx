@@ -1,5 +1,6 @@
 import { useState } from "react";
 import { HiOutlineTrash } from "react-icons/hi";
+import { Link } from "react-router-dom";
 
 function Cart() {
   const [cartItems, setCartItems] = useState([
@@ -164,13 +165,15 @@ function Cart() {
             <span>₹{total}</span>
           </div>
 
-          <button
-            className="mt-6 w-full py-3
+          <Link to="/checkout">
+            <button
+              className="mt-6 w-full py-3
                        bg-[#cf722b] text-white
                        font-semibold hover:opacity-90 transition"
-          >
-            Proceed to Checkout
-          </button>
+            >
+              Proceed to Checkout
+            </button>
+          </Link>
         </div>
       )}
     </div>

@@ -16,6 +16,7 @@ import Category from "./pages/Category";
 import About from "./pages/About";
 import Contact from "./pages/Contact";
 import Wishlist from "./pages/Wishlist";
+import Checkout from "./components/CheckOut";
 
 const router = createBrowserRouter([
   {
@@ -23,13 +24,13 @@ const router = createBrowserRouter([
     element: <App />,
     children: [
       { index: true, element: <Home /> },
-
       { path: "category", element: <Category /> },
       { path: "about", element: <About /> },
       { path: "contact", element: <Contact /> },
       { path: "wishlist", element: <Wishlist /> },
       { path: "account", element: <Account /> },
       { path: "cart", element: <Cart /> },
+      { path: "checkout", element: <Checkout /> },
 
       // Product details (dynamic)
       { path: "details/:id", element: <Details /> },
