@@ -6,11 +6,16 @@ import { createBrowserRouter, RouterProvider } from "react-router-dom";
 import "./index.css";
 
 import App from "./App";
-import Home from "./pages/Home";
-import Account from "./pages/Account";
-import Menu from "./pages/Menu";
-import Cart from "./pages/Cart";
 import Details from "./components/ProductDetails";
+
+// PAGES
+import Account from "./pages/Account";
+import Cart from "./pages/Cart";
+import Home from "./pages/Home";
+import Category from "./pages/Category";
+import About from "./pages/About";
+import Contact from "./pages/Contact";
+import Favourite from "./pages/Favourite";
 
 const router = createBrowserRouter([
   {
@@ -18,10 +23,16 @@ const router = createBrowserRouter([
     element: <App />,
     children: [
       { index: true, element: <Home /> },
+
+      { path: "category", element: <Category /> },
+      { path: "about", element: <About /> },
+      { path: "contact", element: <Contact /> },
+      { path: "wishlist", element: <Favourite /> },
       { path: "account", element: <Account /> },
-      { path: "menu", element: <Menu /> },
       { path: "cart", element: <Cart /> },
-      { path: "/details/:id", element: <Details /> },
+
+      // Product details (dynamic)
+      { path: "details/:id", element: <Details /> },
     ],
   },
 ]);

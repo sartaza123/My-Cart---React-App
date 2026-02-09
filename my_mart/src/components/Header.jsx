@@ -1,61 +1,75 @@
 import { NavLink } from "react-router-dom";
 import {
-  HiOutlineHome,
   HiOutlineUser,
-  HiOutlineMenuAlt2,
+  HiOutlineHeart,
   HiOutlineShoppingCart,
 } from "react-icons/hi";
 
 const Header = () => {
-  const linkStyle = ({ isActive }) =>
+  const navLinkStyle = ({ isActive }) =>
     `
-    relative flex items-center gap-2 pb-1 text-sm font-medium tracking-wide
+    relative px-1 pb-1 text-sm font-medium tracking-wide
     transition-colors duration-300
-    ${
-      isActive
-        ? "text-[#f9b17a] after:w-full"
-        : "text-white/70 hover:text-white after:w-0"
-    }
-    after:content-[''] after:absolute after:left-0 after:-bottom-1
-    after:h-[2px] after:bg-[#f9b17a]
-    after:transition-all after:duration-300
+    ${isActive ? "text-[#f9b17a]" : "text-white/70 hover:text-white"}
+
+    after:content-['']
+    after:absolute after:left-0 after:-bottom-1
+    after:h-[2px] after:w-full after:bg-[#f9b17a]
+    after:scale-x-0 after:origin-right
+    after:transition-transform after:duration-300 after:ease-in-out
+    hover:after:scale-x-100 hover:after:origin-left
+
+    ${isActive ? "after:scale-x-100 after:origin-left" : ""}
   `;
 
-  return (
-    <header className="sticky top-0 z-50 bg-linear-to-r from-[#1b1f3b] via-[#23284f] to-[#1b1f3b]">
-      <div className="max-w-7xl mx-auto px-6 py-4 flex items-center justify-between">
-        {/* Brand */}
-        <h1 className="text-2xl font-semibold tracking-wide text-white">
-          My<span className="text-[#f9b17a]">_</span>mart
-        </h1>
+  const iconStyle =
+    "relative text-white/70 hover:text-[#f9b17a] transition-all duration-300 hover:scale-110";
 
-        {/* Navigation */}
-        <nav className="flex gap-10">
-          <NavLink to="/" className={linkStyle}>
-            <HiOutlineHome size={18} />
+  return (
+    <header className="sticky top-0 z-50 bg-gradient-to-r from-[#1b1f3b] via-[#23284f] to-[#1b1f3b] border-b border-white/5">
+      <div className="max-w-7xl mx-auto px-6 py-4 flex items-center justify-between">
+        {/* LEFT — BRAND */}
+        <div className="flex-1">
+          <h1 className="text-2xl font-semibold tracking-wide text-white">
+            My<span className="text-[#f9b17a]">_</span>mart
+          </h1>
+        </div>
+
+        {/* CENTER — NAV LINKS */}
+        <nav className="flex-1 flex justify-center gap-10">
+          <NavLink to="/" className={navLinkStyle}>
             Home
           </NavLink>
+          <NavLink to="/category" className={navLinkStyle}>
+            Category
+          </NavLink>
+          <NavLink to="/about" className={navLinkStyle}>
+            About Us
+          </NavLink>
+          <NavLink to="/contact" className={navLinkStyle}>
+            Contact
+          </NavLink>
+        </nav>
 
-          <NavLink to="/menu" className={linkStyle}>
-            <HiOutlineMenuAlt2 size={18} />
-            Menu
+        {/* RIGHT — ICONS */}
+        <div className="flex-1 flex justify-end items-center gap-6">
+          <NavLink to="/account" className={iconStyle}>
+            <HiOutlineUser size={22} />
           </NavLink>
 
-          <NavLink to="/account" className={linkStyle}>
-            <HiOutlineUser size={18} />
-            Account
+          <NavLink to="/wishlist" className={iconStyle}>
+            <HiOutlineHeart size={22} />
           </NavLink>
 
-          <NavLink to="/cart" className={linkStyle}>
+          <NavLink to="/cart" className={iconStyle}>
             <div className="relative">
-              <HiOutlineShoppingCart size={18} />
+              <HiOutlineShoppingCart size={22} />
               <span className="absolute -top-2 -right-2 bg-[#f9b17a] text-[#1b1f3b] text-[10px] font-semibold w-4 h-4 rounded-full flex items-center justify-center">
                 0
               </span>
             </div>
-            Cart
           </NavLink>
-        </nav>
+        </div>
       </div>
     </header>
   );
