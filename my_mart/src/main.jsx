@@ -15,7 +15,7 @@ import Home from "./pages/Home";
 import Category from "./pages/Category";
 import About from "./pages/About";
 import Contact from "./pages/Contact";
-import Favourite from "./pages/Favourite";
+import Wishlist from "./pages/Wishlist";
 
 const router = createBrowserRouter([
   {
@@ -27,7 +27,7 @@ const router = createBrowserRouter([
       { path: "category", element: <Category /> },
       { path: "about", element: <About /> },
       { path: "contact", element: <Contact /> },
-      { path: "wishlist", element: <Favourite /> },
+      { path: "wishlist", element: <Wishlist /> },
       { path: "account", element: <Account /> },
       { path: "cart", element: <Cart /> },
 
