@@ -1,6 +1,8 @@
 import { useParams } from "react-router-dom";
 import { useFetch } from "../hooks/useFetch";
 import { useState } from "react";
+import { useDispatch } from "react-redux";
+import { addItem } from "../hooks/cartSlice";
 
 function Details() {
   const { id } = useParams();
@@ -20,6 +22,12 @@ function Details() {
 
   const savings = product.price - discountedPrice;
   const saved = Number(savings.toFixed(2));
+
+  const dispatch = useDispatch();
+
+  function handleAdd() {
+    dispatch(addItem(product));
+  }
 
   return (
     <div className="max-w-7xl mx-auto px-4 sm:px-6 py-10">
@@ -137,7 +145,10 @@ function Details() {
             <button className="px-8 py-3 bg-gradient-to-r from-[#1b1f3b] via-[#23284f] to-[#1b1f3b] text-white">
               Buy Now
             </button>
-            <button className="px-8 py-3 border border-[#1b1f3b] text-[#1b1f3b] hover:bg-[#1b1f3b] hover:text-white">
+            <button
+              onClick={() => handleAdd(product)}
+              className="px-8 py-3 border border-[#1b1f3b] text-[#1b1f3b] hover:bg-[#1b1f3b] hover:text-white"
+            >
               Add to Cart
             </button>
           </div>
