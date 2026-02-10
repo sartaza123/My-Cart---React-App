@@ -7,6 +7,7 @@ import "./index.css";
 
 import App from "./App";
 import Details from "./components/ProductDetails";
+import Error from "./components/Error";
 
 // PAGES
 import Account from "./pages/Account";
@@ -17,7 +18,10 @@ import About from "./pages/About";
 import Contact from "./pages/Contact";
 import Wishlist from "./pages/Wishlist";
 import Checkout from "./components/CheckOut";
-import Error from "./components/Error";
+
+// redux
+import { Provider } from "react-redux";
+import appStore from "./components/appStore";
 
 const router = createBrowserRouter([
   {
@@ -42,6 +46,8 @@ const router = createBrowserRouter([
 
 createRoot(document.getElementById("root")).render(
   <React.StrictMode>
-    <RouterProvider router={router} />
+    <Provider store={appStore}>
+      <RouterProvider router={router} />
+    </Provider>
   </React.StrictMode>,
 );
