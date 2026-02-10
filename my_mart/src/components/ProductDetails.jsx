@@ -5,10 +5,11 @@ import { useDispatch } from "react-redux";
 import { addItem } from "../hooks/cartSlice";
 
 function Details() {
-  const { id } = useParams();
-  const { data, loading, error } = useFetch("https://dummyjson.com/products");
   const [activeImg, setActiveImg] = useState(0);
-  const [qty, setQty] = useState(1);
+  const [adding, setAdding] = useState(false);
+  const { id } = useParams();
+  const dispatch = useDispatch();
+  const { data, loading, error } = useFetch("https://dummyjson.com/products");
 
   if (loading) return <p className="text-center py-10">Loading product...</p>;
   if (error) return <p className="text-center py-10">Error: {error}</p>;
@@ -23,11 +24,12 @@ function Details() {
   const savings = product.price - discountedPrice;
   const saved = Number(savings.toFixed(2));
 
-  const dispatch = useDispatch();
-
-  function handleAdd() {
+  const handleAdd = () => {
+    if (adding) return;
+    setAdding(true);
     dispatch(addItem(product));
-  }
+    setTimeout(() => setAdding(false), 400);
+  };
 
   return (
     <div className="max-w-7xl mx-auto px-4 sm:px-6 py-10">
@@ -123,30 +125,13 @@ function Details() {
             <li>✔ Secure payment options</li>
           </ul>
 
-          {/* Quantity */}
-          <div className="flex items-center gap-3 mt-4">
-            <span className="text-sm font-medium">Qty</span>
-            <div className="flex border rounded overflow-hidden">
-              <button
-                onClick={() => qty > 1 && setQty(qty - 1)}
-                className="px-3"
-              >
-                −
-              </button>
-              <span className="px-4">{qty}</span>
-              <button onClick={() => setQty(qty + 1)} className="px-3">
-                +
-              </button>
-            </div>
-          </div>
-
           {/* Buttons */}
           <div className="flex flex-col sm:flex-row gap-4 mt-6">
             <button className="px-8 py-3 bg-gradient-to-r from-[#1b1f3b] via-[#23284f] to-[#1b1f3b] text-white">
               Buy Now
             </button>
             <button
-              onClick={() => handleAdd(product)}
+              onClick={handleAdd}
               className="px-8 py-3 border border-[#1b1f3b] text-[#1b1f3b] hover:bg-[#1b1f3b] hover:text-white"
             >
               Add to Cart

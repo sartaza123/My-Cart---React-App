@@ -2,14 +2,21 @@ import { FiHeart, FiEye, FiShoppingCart } from "react-icons/fi";
 import { Link } from "react-router-dom";
 import { useDispatch } from "react-redux";
 import { addItem } from "../hooks/cartSlice";
+import { useState } from "react";
 
 const ProductCard = ({ product }) => {
+  const [adding, setAdding] = useState(false);
+
   const dispatch = useDispatch();
 
-  function handleAdd() {
+  const handleAdd = (e) => {
+    e.preventDefault();
+    e.stopPropagation();
+    if (adding) return;
+    setAdding(true);
     dispatch(addItem(product));
-  }
-
+    setTimeout(() => setAdding(false), 400);
+  };
   return (
     <div className="group relative bg-[#f6f6f6] rounded-md overflow-hidden shadow-sm">
       {/* Image section */}
@@ -40,8 +47,8 @@ const ProductCard = ({ product }) => {
         {/* Add to cart overlay */}
         <div className="absolute bottom-0 left-0 right-0 translate-y-full group-hover:translate-y-0 transition-all duration-300">
           <button
-            onClick={() => handleAdd(product)}
-            className="w-full py-3 bg-gradient-to-r from-[#1b1f3b] via-[#23284f] to-[#1b1f3b] text-white flex items-center justify-center gap-2 opacity-95 hover:opacity-100"
+            onClick={handleAdd}
+            className="w-full py-3 bg-gradient-to-r from-[#1b1f3b] via-[#23284f] to-[#1b1f3b] text-white flex items-center justify-center gap-2 active:scale-95 transition-transform"
           >
             <FiShoppingCart />
             Add to cart
