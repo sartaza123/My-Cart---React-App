@@ -17,11 +17,13 @@ import About from "./pages/About";
 import Contact from "./pages/Contact";
 import Wishlist from "./pages/Wishlist";
 import Checkout from "./components/CheckOut";
+import Error from "./components/Error";
 
 const router = createBrowserRouter([
   {
     path: "/",
     element: <App />,
+    errorElement: <Error />,
     children: [
       { index: true, element: <Home /> },
       { path: "category", element: <Category /> },
