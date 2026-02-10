@@ -1,24 +1,12 @@
 import { useState } from "react";
 import { HiOutlineTrash } from "react-icons/hi";
 import { Link } from "react-router-dom";
+import { useSelector } from "react-redux";
 
 function Cart() {
-  const [cartItems, setCartItems] = useState([
-    {
-      id: 1,
-      title: "Premium Jacket",
-      price: 2999,
-      image: "https://dummyjson.com/image/400x400/eeeeee/000000?text=Jacket",
-      qty: 1,
-    },
-    {
-      id: 2,
-      title: "Stylish Shoes",
-      price: 1899,
-      image: "https://dummyjson.com/image/400x400/eeeeee/000000?text=Shoes",
-      qty: 2,
-    },
-  ]);
+  const addedItems = useSelector((state) => state.cart.items);
+  const [cartItems, setCartItems] = useState(addedItems);
+  console.log(addedItems);
 
   const SHIPPING_CHARGE = 49;
   const PLATFORM_FEE = 20;
