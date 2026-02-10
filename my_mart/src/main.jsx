@@ -21,7 +21,7 @@ import Checkout from "./components/CheckOut";
 
 // redux
 import { Provider } from "react-redux";
-import appStore from "./components/appStore";
+import appStore from "./hooks/appStore";
 
 const router = createBrowserRouter([
   {
