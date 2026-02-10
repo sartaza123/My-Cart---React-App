@@ -1,39 +1,23 @@
-import { useState } from "react";
 import { HiOutlineTrash } from "react-icons/hi";
 import { Link } from "react-router-dom";
-import { useSelector } from "react-redux";
+import { useSelector, useDispatch } from "react-redux";
+import {
+  increaseQty,
+  decreaseQty,
+  removeItem,
+  clearCart,
+} from "../hooks/cartSlice";
 
 function Cart() {
-  const addedItems = useSelector((state) => state.cart.items);
-  const [cartItems, setCartItems] = useState(addedItems);
-  console.log(addedItems);
+  const dispatch = useDispatch();
+  const cartItems = useSelector((state) => state.cart.items);
 
-  const SHIPPING_CHARGE = 49;
-  const PLATFORM_FEE = 20;
-  const COUPON_DISCOUNT = 150;
-
-  const increaseQty = (id) => {
-    setCartItems((items) =>
-      items.map((item) =>
-        item.id === id ? { ...item, qty: item.qty + 1 } : item,
-      ),
-    );
-  };
-
-  const decreaseQty = (id) => {
-    setCartItems((items) =>
-      items.map((item) =>
-        item.id === id && item.qty > 1 ? { ...item, qty: item.qty - 1 } : item,
-      ),
-    );
-  };
-
-  const removeItem = (id) => {
-    setCartItems((items) => items.filter((item) => item.id !== id));
-  };
+  const SHIPPING_CHARGE = 1;
+  const PLATFORM_FEE = 0.1;
+  const COUPON_DISCOUNT = 5;
 
   const subtotal = cartItems.reduce(
-    (sum, item) => sum + item.price * item.qty,
+    (sum, item) => sum + item.price * (item.qty || 1),
     0,
   );
 
@@ -44,19 +28,30 @@ function Cart() {
       {/* HEADER */}
       <div className="mb-8">
         <h1 className="text-2xl font-bold text-[#1b1f3b]">Shopping Cart</h1>
-        <p className="text-sm text-gray-600">
-          Review your items before checkout
-        </p>
+        <p className="text-sm text-gray-500">Manage your selected items</p>
       </div>
 
+      {/* EMPTY CART */}
+      {cartItems.length === 0 && (
+        <div className="text-center py-20">
+          <p className="text-gray-500 mb-4">Your cart is empty</p>
+          <Link to="/" className="text-[#cf722b] font-medium hover:underline">
+            Continue Shopping →
+          </Link>
+        </div>
+      )}
+
       {/* CART ITEMS */}
-      <div className="space-y-10">
+      <div className="space-y-8">
         {cartItems.map((item) => (
-          <div key={item.id} className="flex flex-col md:flex-row gap-6">
+          <div
+            key={item.id}
+            className="flex flex-col md:flex-row gap-6 border-b"
+          >
             {/* IMAGE */}
-            <div className="w-full md:w-[220px] h-[220px] flex-shrink-0">
+            <div className="w-full md:w-[220px] h-[220px] shrink-0">
               <img
-                src={item.image}
+                src={item.thumbnail || item.image}
                 alt={item.title}
                 className="w-full h-full object-cover rounded-lg"
               />
@@ -69,23 +64,26 @@ function Cart() {
                   {item.title}
                 </h3>
                 <p className="text-sm text-gray-500 mt-1">
-                  ₹{item.price} per item
+                  ${item.price} per item
                 </p>
               </div>
 
-              {/* QTY */}
+              {/* QUANTITY */}
               <div className="flex items-center gap-3">
-                <span className="text-sm font-medium">Qty</span>
+                <span className="text-sm font-medium">Quantity</span>
                 <div className="flex border rounded overflow-hidden">
                   <button
-                    onClick={() => decreaseQty(item.id)}
+                    onClick={() => dispatch(decreaseQty(item.id))}
                     className="px-3 py-1 hover:bg-gray-100"
+                    disabled={item.qty === 1}
                   >
                     −
                   </button>
-                  <span className="px-3 py-1 text-sm">{item.qty}</span>
+
+                  <span className="px-4 py-1 text-sm">{item.qty}</span>
+
                   <button
-                    onClick={() => increaseQty(item.id)}
+                    onClick={() => dispatch(increaseQty(item.id))}
                     className="px-3 py-1 hover:bg-gray-100"
                   >
                     +
@@ -95,36 +93,33 @@ function Cart() {
 
               {/* ITEM TOTAL */}
               <p className="text-sm font-medium text-[#1b1f3b]">
-                Item Total: ₹{item.price * item.qty}
+                Item Total: ${(item.price * item.qty).toFixed(2)}
               </p>
 
-              {/* ACTION BUTTONS (GROUPED) */}
-              <div className="flex gap-4 mt-2">
-                <button
-                  onClick={() => removeItem(item.id)}
-                  className="flex items-center gap-1 text-sm
-                             text-[#1b1f3b] hover:text-red-500 border px-5 rounded-md"
-                >
-                  <HiOutlineTrash />
-                  Remove
-                </button>
-
-                <button
-                  className="px-6 py-2 text-sm font-medium
-                             bg-gradient-to-r from-[#1b1f3b] via-[#23284f] to-[#1b1f3b]
-                             text-white rounded hover:opacity-90"
-                >
-                  Buy Now
-                </button>
-              </div>
+              {/* ACTION */}
+              <button
+                onClick={() => dispatch(removeItem(item.id))}
+                className="flex items-center gap-1 text-sm text-gray-500 hover:text-red-500 w-fit border rounded-md px-5 py-2"
+              >
+                <HiOutlineTrash />
+                Remove
+              </button>
             </div>
           </div>
         ))}
       </div>
 
+      {/* clear cart */}
+      <button
+        onClick={() => dispatch(clearCart())}
+        className="mt-6 w-full py-3 bg-[#cf722b] text-white font-semibold rounded hover:opacity-90 transition"
+      >
+        Clear Cart
+      </button>
+
       {/* ORDER SUMMARY */}
       {cartItems.length > 0 && (
-        <div className="mt-14 bg-[#f9f9f9] rounded-xl p-6">
+        <div className="mt-14 bg-[#e7e7e7] rounded-xl p-6">
           <h3 className="text-lg font-semibold text-[#1b1f3b] mb-4">
             Order Summary
           </h3>
@@ -132,33 +127,32 @@ function Cart() {
           <div className="space-y-3 text-sm text-gray-700">
             <div className="flex justify-between">
               <span>Subtotal</span>
-              <span>₹{subtotal}</span>
+              <span>${subtotal.toFixed(2)}</span>
             </div>
+
             <div className="flex justify-between">
               <span>Shipping Charges</span>
-              <span>₹{SHIPPING_CHARGE}</span>
+              <span>${SHIPPING_CHARGE}</span>
             </div>
+
             <div className="flex justify-between">
               <span>Platform Fee</span>
-              <span>₹{PLATFORM_FEE}</span>
+              <span>${PLATFORM_FEE}</span>
             </div>
+
             <div className="flex justify-between text-green-600">
               <span>Coupon Discount</span>
-              <span>-₹{COUPON_DISCOUNT}</span>
+              <span>-${COUPON_DISCOUNT}</span>
             </div>
           </div>
 
           <div className="border-t mt-4 pt-4 flex justify-between font-semibold text-lg text-[#1b1f3b]">
             <span>Total Payable</span>
-            <span>₹{total}</span>
+            <span>${total.toFixed(2)}</span>
           </div>
 
           <Link to="/checkout">
-            <button
-              className="mt-6 w-full py-3
-                       bg-[#cf722b] text-white
-                       font-semibold hover:opacity-90 transition"
-            >
+            <button className="mt-6 w-full py-3 bg-[#cf722b] text-white font-semibold rounded hover:opacity-90 transition">
               Proceed to Checkout
             </button>
           </Link>

@@ -8,7 +8,7 @@ import {
 import { useSelector } from "react-redux";
 const Header = () => {
   const cartItems = useSelector((state) => state.cart.items);
-  const totalItems = cartItems.reduce((sum, item) => sum + item.quantity, 0);
+  const totalItems = cartItems.reduce((sum, item) => sum + (item.qty || 0), 0);
 
   const navLinkStyle = ({ isActive }) =>
     `

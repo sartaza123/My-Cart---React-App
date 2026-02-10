@@ -107,15 +107,15 @@ function Details() {
 
           <div className="flex items-center gap-3 mt-4">
             <span className="text-2xl font-semibold text-[#1b1f3b]">
-              ₹{discountedPrice}
+              ${discountedPrice}
             </span>
-            <span className="line-through text-gray-400">₹{product.price}</span>
+            <span className="line-through text-gray-400">${product.price}</span>
             <span className="text-green-600 text-sm font-semibold">
               {product.discountPercentage}% OFF
             </span>
           </div>
 
-          <p className="text-sm text-green-700 mt-1">You save ₹{saved}</p>
+          <p className="text-sm text-green-700 mt-1">You save ${saved}</p>
 
           {/* HIGHLIGHTS */}
           <ul className="mt-4 text-sm text-gray-600 space-y-1">

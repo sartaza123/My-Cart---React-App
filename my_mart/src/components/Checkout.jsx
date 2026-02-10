@@ -137,28 +137,28 @@ function Checkout() {
                 <span>
                   {item.title} × {item.qty}
                 </span>
-                <span>₹{item.price * item.qty}</span>
+                <span>${item.price * item.qty}</span>
               </div>
             ))}
 
             <div className="border-t pt-3 mt-3 space-y-2">
               <div className="flex justify-between">
                 <span>Subtotal</span>
-                <span>₹{subtotal}</span>
+                <span>${subtotal}</span>
               </div>
               <div className="flex justify-between">
                 <span>Shipping</span>
-                <span>₹{SHIPPING}</span>
+                <span>${SHIPPING}</span>
               </div>
               <div className="flex justify-between">
                 <span>Platform Fee</span>
-                <span>₹{PLATFORM_FEE}</span>
+                <span>${PLATFORM_FEE}</span>
               </div>
             </div>
 
             <div className="border-t pt-3 flex justify-between font-semibold text-[#1b1f3b]">
               <span>Total</span>
-              <span>₹{TOTAL}</span>
+              <span>${TOTAL}</span>
             </div>
           </div>
 

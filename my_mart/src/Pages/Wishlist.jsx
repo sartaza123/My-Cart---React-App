@@ -86,7 +86,7 @@ function Wishlist() {
                   {item.title}
                 </h4>
 
-                <p className="text-sm text-gray-500 mb-4">₹{item.price}</p>
+                <p className="text-sm text-gray-500 mb-4">${item.price}</p>
 
                 {/* ACTION */}
                 <button

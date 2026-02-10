@@ -67,9 +67,9 @@ const ProductCard = ({ product }) => {
         </h3>
 
         <div className="flex items-center justify-center gap-2">
-          <span className="text-[#1b1f3b] font-semibold">₹{product.price}</span>
+          <span className="text-[#1b1f3b] font-semibold">${product.price}</span>
           <span className="text-gray-400 line-through text-sm">
-            ₹{Math.round(product.price * 1.3)}
+            ${Math.round(product.price * 1.3)}
           </span>
         </div>
 
