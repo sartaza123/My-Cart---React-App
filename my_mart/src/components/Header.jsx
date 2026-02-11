@@ -61,10 +61,6 @@ const Header = () => {
             <HiOutlineUser size={22} />
           </NavLink>
 
-          <NavLink to="/wishlist" className={iconStyle}>
-            <HiOutlineHeart size={22} />
-          </NavLink>
-
           <NavLink to="/cart" className={iconStyle}>
             <div className="relative">
               <HiOutlineShoppingCart size={22} />
