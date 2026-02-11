@@ -95,8 +95,12 @@ My-Cart---React-App-main/
 ```
 
 ---
-
 ## ▶️ How to Run This Project
+## Download
+
+```bash
+git clone https://github.com/sartaza123/My-Cart---React-App.git
+```
 
 Follow the steps below:
 
