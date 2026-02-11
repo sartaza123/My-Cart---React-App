@@ -41,17 +41,25 @@ const Header = () => {
 
   const navLinkStylePrimary = ({ isActive }) =>
     `
-    relative px-1 pb-1 text-sm font-medium tracking-wide
-    transition-colors duration-300
-    ${isActive ? "text-[#f9b17a]" : "text-white/70 hover:text-white"}
-  `;
+  relative px-1 pb-1 text-sm font-medium tracking-wide
+  transition-colors duration-300
+  after:content-[''] after:absolute after:left-0 after:bottom-0
+  after:h-[2px] after:w-0 after:bg-[#f9b17a]
+  after:transition-all after:duration-300
+  hover:after:w-full
+  ${isActive ? "text-[#f9b17a] after:w-full" : "text-white/70 hover:text-white"}
+`;
 
   const navLinkStyleSecondary = ({ isActive }) =>
     `
-    relative px-1 pb-1 text-sm font-medium tracking-wide
-    transition-colors duration-300
-    ${isActive ? "text-[#1b1f3b]" : "text-white/90 hover:text-white"}
-  `;
+  relative px-1 pb-1 text-sm font-medium tracking-wide
+  transition-colors duration-300
+  after:content-[''] after:absolute after:left-0 after:bottom-0
+  after:h-[2px] after:w-0 after:bg-[#1b1f3b]
+  after:transition-all after:duration-300
+  hover:after:w-full
+  ${isActive ? "text-[#1b1f3b] after:w-full" : "text-white/90 hover:text-white"}
+`;
 
   const iconStyle =
     "relative text-white/70 hover:text-[#f9b17a] transition-all duration-300 hover:scale-110";

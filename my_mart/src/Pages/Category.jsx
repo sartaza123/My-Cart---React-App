@@ -10,6 +10,7 @@ import p2 from "../assets/img/product/product2.png";
 import p3 from "../assets/img/product/product3.png";
 import p4 from "../assets/img/product/product4.png";
 import p5 from "../assets/img/product/product5.png";
+import bannerBg from "../assets/img/banner/banner-bg3.png";
 
 // 🔹 CATEGORY UI DATA (dummy + premium)
 const categoryShowcase = [
@@ -60,48 +61,66 @@ function Category() {
   );
 
   return (
-    <div className="max-w-7xl mx-auto px-6 py-12">
-      {/* ================= CATEGORY SHOWCASE ================= */}
-      <section className="mb-16">
-        <h1 className="text-3xl font-bold text-[#1b1f3b] mb-2">
-          Shop by Category
-        </h1>
-        <p className="text-gray-600 mb-8">
-          Hand-picked collections crafted for your lifestyle
-        </p>
+    <>
+      <section
+        className="relative w-full h-[260px] flex items-center justify-center text-white"
+        style={{
+          backgroundImage: `url(${bannerBg})`,
+          backgroundSize: "cover",
+          backgroundPosition: "center",
+        }}
+      >
+        {/* Dark overlay */}
+        <div className="absolute inset-0 bg-black/50"></div>
 
-        <div className="grid grid-cols-2 md:grid-cols-4 gap-6">
-          {categoryShowcase.map((cat) => (
-            <div
-              key={cat.title}
-              onClick={() => setActiveCategory(cat.key)}
-              className={`group relative overflow-hidden rounded-xl cursor-pointer
-                ${cat.big ? "md:col-span-2 md:row-span-2 h-[360px]" : "h-[170px]"}
-              `}
-            >
-              <img
-                src={cat.image}
-                alt={cat.title}
-                className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110"
-              />
-
-              {/* Overlay */}
-              <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-black/20 to-transparent" />
-
-              {/* Text */}
-              <div className="absolute bottom-4 left-4">
-                <h3 className="text-white text-xl font-semibold tracking-wide">
-                  {cat.title}
-                </h3>
-                <span className="text-sm text-white/80">
-                  Explore Collection →
-                </span>
-              </div>
-            </div>
-          ))}
+        {/* Content */}
+        <div className="relative z-10 text-center">
+          <h1 className="text-6xl font-bold tracking-wide">Categories</h1>
         </div>
       </section>
-    </div>
+      <div className="max-w-7xl mx-auto px-6 py-12">
+        {/* ================= CATEGORY SHOWCASE ================= */}
+        <section className="mb-16">
+          <h1 className="text-3xl font-bold text-[#1b1f3b] mb-2">
+            Shop by Category
+          </h1>
+          <p className="text-gray-600 mb-8">
+            Hand-picked collections crafted for your lifestyle
+          </p>
+
+          <div className="grid grid-cols-2 md:grid-cols-4 gap-6">
+            {categoryShowcase.map((cat) => (
+              <div
+                key={cat.title}
+                onClick={() => setActiveCategory(cat.key)}
+                className={`group relative overflow-hidden rounded-xl cursor-pointer
+                ${cat.big ? "md:col-span-2 md:row-span-2 h-[360px]" : "h-[170px]"}
+              `}
+              >
+                <img
+                  src={cat.image}
+                  alt={cat.title}
+                  className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110"
+                />
+
+                {/* Overlay */}
+                <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-black/20 to-transparent" />
+
+                {/* Text */}
+                <div className="absolute bottom-4 left-4">
+                  <h3 className="text-white text-xl font-semibold tracking-wide">
+                    {cat.title}
+                  </h3>
+                  <span className="text-sm text-white/80">
+                    Explore Collection →
+                  </span>
+                </div>
+              </div>
+            ))}
+          </div>
+        </section>
+      </div>
+    </>
   );
 }
 
