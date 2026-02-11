@@ -1,56 +1,56 @@
-import { NavLink } from "react-router-dom";
+import { NavLink, useNavigate } from "react-router-dom";
 import {
   HiOutlineUser,
   HiOutlineShoppingCart,
   HiOutlineSearch,
 } from "react-icons/hi";
 
-import { useSelector } from "react-redux";
-import { useEffect, useState } from "react";
+import { useDispatch, useSelector } from "react-redux";
+import { setSearchQuery } from "../hooks/searchSlice";
+
+import { useEffect, useRef, useState } from "react";
+
 const Header = () => {
+  const dispatch = useDispatch();
+  const navigate = useNavigate();
+  const inputRef = useRef(null);
+
+  // Cart
   const cartItems = useSelector((state) => state.cart.items);
   const totalItems = cartItems.reduce((sum, item) => sum + (item.qty || 0), 0);
 
+  // Scroll
   const [scrolled, setScrolled] = useState(false);
 
   useEffect(() => {
-    const handleScroll = () => {
-      setScrolled(window.scrollY > 0);
-    };
-
+    const handleScroll = () => setScrolled(window.scrollY > 0);
     window.addEventListener("scroll", handleScroll);
     return () => window.removeEventListener("scroll", handleScroll);
   }, []);
+
+  // Search Handler
+  const handleSearch = () => {
+    const value = inputRef.current.value.trim();
+    if (!value) return;
+
+    dispatch(setSearchQuery(value));
+    navigate("/search");
+
+    inputRef.current.value = "";
+  };
 
   const navLinkStylePrimary = ({ isActive }) =>
     `
     relative px-1 pb-1 text-sm font-medium tracking-wide
     transition-colors duration-300
     ${isActive ? "text-[#f9b17a]" : "text-white/70 hover:text-white"}
-
-    after:content-['']
-    after:absolute after:left-0 after:-bottom-1
-    after:h-[2px] after:w-full after:bg-[#f9b17a]
-    after:scale-x-0 after:origin-right
-    after:transition-transform after:duration-300 after:ease-in-out
-    hover:after:scale-x-100 hover:after:origin-left
-
-    ${isActive ? "after:scale-x-100 after:origin-left" : ""}
   `;
+
   const navLinkStyleSecondary = ({ isActive }) =>
     `
     relative px-1 pb-1 text-sm font-medium tracking-wide
     transition-colors duration-300
     ${isActive ? "text-[#1b1f3b]" : "text-white/90 hover:text-white"}
-
-    after:content-['']
-    after:absolute after:left-0 after:-bottom-1
-    after:h-[2px] after:w-full after:bg-[#1b1f3b]
-    after:scale-x-0 after:origin-right
-    after:transition-transform after:duration-300 after:ease-in-out
-    hover:after:scale-x-100 hover:after:origin-left
-
-    ${isActive ? "after:scale-x-100 after:origin-left" : ""}
   `;
 
   const iconStyle =
@@ -58,20 +58,19 @@ const Header = () => {
 
   return (
     <>
-      {/* ==================== Header 1 ======================== */}
-
+      {/* Sticky Header */}
       <div
-        className={` fixed top-0 left-0 w-full z-50 bg-gradient-to-r from-[#1b1f3b] via-[#23284f] to-[#1b1f3b] shadow-md transition-all border-b border-white duration-500
-           ${scrolled ? "-translate-y-0 opacity-100" : "translate-y-full opacity-0"}
-          `}
+        className={`fixed top-0 left-0 w-full z-50 
+        bg-gradient-to-r from-[#1b1f3b] via-[#23284f] to-[#1b1f3b]
+        shadow-md transition-all duration-500 border-b border-white
+        ${scrolled ? "translate-y-0 opacity-100" : "-translate-y-full opacity-0"}
+        `}
       >
-        <div className="max-w-7xl py-3 mx-auto px-14 py-3 flex items-center justify-between">
-          {/* LEFT */}
+        <div className="max-w-7xl mx-auto px-14 py-3 flex items-center justify-between">
           <h1 className="text-xl font-semibold text-white">
             My<span className="text-[#f9b17a]">_</span>mart
           </h1>
 
-          {/* CENTER */}
           <nav className="flex gap-8">
             <NavLink to="/" className={navLinkStylePrimary}>
               Home
@@ -87,7 +86,6 @@ const Header = () => {
             </NavLink>
           </nav>
 
-          {/* RIGHT */}
           <div className="flex items-center gap-5">
             <NavLink to="/account" className={iconStyle}>
               <HiOutlineUser size={25} />
@@ -105,51 +103,52 @@ const Header = () => {
         </div>
       </div>
 
-      {/* =====================  header 2 ============================== */}
-
+      {/* Main Header */}
       <div
-        className={`w-full transition-all duration-500
-        ${scrolled ? "translate-y-full opacity-0" : "translate-y-0 opacity-100"} `}
+        className={`transition-all duration-500
+        ${scrolled ? "translate-y-full opacity-0" : "translate-y-0 opacity-100"}
+        `}
       >
         <header>
-          <div className="max-w-7xl mx-auto px-14 py-4 flex items-center bg-gradient-to-r from-[#1b1f3b] via-[#23284f] to-[#1b1f3b] border-b border-white/50 justify-between">
-            {/* LEFT — BRAND */}
+          <div className="max-w-7xl mx-auto px-14 py-4 flex items-center justify-between bg-gradient-to-r from-[#1b1f3b] via-[#23284f] to-[#1b1f3b] border-b border-white/50">
+            {/* Brand */}
             <div className="flex-1">
               <h1 className="text-3xl font-semibold tracking-wide text-white">
                 My<span className="text-[#f9b17a]">_</span>mart
               </h1>
             </div>
 
-            {/* RIGHT — ICONS AND SEARCH */}
-            <div className="flex items-center gap-10  ">
-              <div className="flex w-sm border border-[#f9b17a]">
+            {/* Search + Icons */}
+            <div className="flex items-center gap-10">
+              {/* Search */}
+              <div className="flex border border-[#f9b17a]">
                 <input
+                  ref={inputRef}
                   type="text"
                   placeholder="Search products..."
-                  className="
-                  p-3 w-full
-                  text-sm
-                  text-white
-                  outline-none
-                "
+                  className="p-3 w-full text-sm text-white outline-none bg-transparent"
+                  onKeyDown={(e) => e.key === "Enter" && handleSearch()}
                 />
-                <div className="bg-[#f9b17a] hover:bg-[#da8646] p-3 cursor-pointer">
-                  <HiOutlineSearch
-                    className=" text-white hover:scale-110 "
-                    size={20}
-                  />
-                </div>
+
+                <button
+                  onClick={handleSearch}
+                  className="bg-[#f9b17a] hover:bg-[#da8646] p-3"
+                >
+                  <HiOutlineSearch className="text-white" size={20} />
+                </button>
               </div>
 
+              {/* Account */}
               <NavLink to="/account" className={iconStyle}>
-                <div className="flex flex-col items-center justify-center">
+                <div className="flex flex-col items-center">
                   <HiOutlineUser size={25} />
                   <p>Account</p>
                 </div>
               </NavLink>
 
+              {/* Cart */}
               <NavLink to="/cart" className={iconStyle}>
-                <div className="flex flex-col items-center justify-center">
+                <div className="flex flex-col items-center">
                   <div className="relative">
                     <HiOutlineShoppingCart size={25} />
                     <span className="absolute -top-2 -right-2 bg-[#f9b17a] text-[#1b1f3b] text-[10px] font-semibold w-4 h-4 rounded-full flex items-center justify-center">
@@ -161,19 +160,21 @@ const Header = () => {
               </NavLink>
             </div>
           </div>
+
+          {/* Secondary Nav */}
           <div className="w-full bg-[#f9b17a] text-[#1b1f3b]">
-            <nav className="flex-1 flex mx-20 py-3 gap-10">
+            <nav className="flex mx-20 py-3 gap-10">
               <NavLink to="/" className={navLinkStyleSecondary}>
-                <div className="pt-2">Home</div>
+                Home
               </NavLink>
               <NavLink to="/category" className={navLinkStyleSecondary}>
-                <div className="pt-2">Category</div>
+                Category
               </NavLink>
               <NavLink to="/about" className={navLinkStyleSecondary}>
-                <div className="pt-2">About Us</div>
+                About Us
               </NavLink>
               <NavLink to="/contact" className={navLinkStyleSecondary}>
-                <div className="pt-2">Contact Us</div>
+                Contact Us
               </NavLink>
             </nav>
           </div>

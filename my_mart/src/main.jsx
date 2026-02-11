@@ -8,6 +8,7 @@ import "./index.css";
 import App from "./App";
 import Details from "./components/ProductDetails";
 import Error from "./components/Error";
+import Search from "./components/Search";
 
 // PAGES
 import Account from "./pages/Account";
@@ -35,6 +36,7 @@ const router = createBrowserRouter([
       { path: "account", element: <Account /> },
       { path: "cart", element: <Cart /> },
       { path: "checkout", element: <Checkout /> },
+      { path: "search", element: <Search /> },
 
       // Product details (dynamic)
       { path: "details/:id", element: <Details /> },
