@@ -1,5 +1,7 @@
 import { useEffect, useState } from "react";
 
+// fetch api using custom hook
+
 export function useFetch(url) {
   const [data, setData] = useState(null);
   const [loading, setLoading] = useState(true);
@@ -27,6 +29,8 @@ export function useFetch(url) {
 
     fetchData();
   }, [url]);
+
+  //  returning fetched data
 
   return { data, loading, error };
 }

@@ -10,6 +10,7 @@ function Carousel() {
   const [currentSlide, setCurrentSlide] = useState(0);
   const [animateContent, setAnimateContent] = useState(false);
 
+  // Slide left
   function handleLeftSlider() {
     setAnimateContent(true);
 
@@ -22,6 +23,7 @@ function Carousel() {
     }, 450);
   }
 
+  // Slide right
   function handleRightSlider() {
     setAnimateContent(true);
 
@@ -35,8 +37,15 @@ function Carousel() {
   }
 
   return (
-    <div className="relative w-full h-[500px] overflow-hidden">
-      {/* ================= SLIDER TRACK ================= */}
+    <div
+      className="relative w-full 
+      h-[260px] 
+      sm:h-[320px] 
+      md:h-[400px] 
+      lg:h-[480px] 
+      overflow-hidden"
+    >
+      {/* Slider Track */}
       <div
         className="absolute inset-0 flex transition-transform duration-700 ease-in-out"
         style={{ transform: `translateX(-${currentSlide * 100}%)` }}
@@ -51,9 +60,9 @@ function Carousel() {
         ))}
       </div>
 
-      {/* ================= CONTENT ================= */}
-      <div className="relative z-10 max-w-xl h-full flex flex-col justify-center px-20 gap-4">
-        {/* UPPER PART (moves UP) */}
+      {/* Content Overlay */}
+      <div className="relative z-10 h-full flex flex-col justify-center px-6 sm:px-12 md:px-20 gap-4 max-w-7xl">
+        {/* Upper Content */}
         <div
           className={`transition-all duration-500 ease-in-out
             ${
@@ -63,14 +72,16 @@ function Carousel() {
             }
           `}
         >
-          <span className="text-[#1b1f3b] font-semibold">Match your Style</span>
+          <span className="text-[#1b1f3b] text-xs sm:text-sm md:text-base font-semibold">
+            Match your Style
+          </span>
 
-          <h2 className="text-4xl font-bold text-[#1b1f3b] leading-tight mt-2">
+          <h2 className="text-lg sm:text-2xl md:text-3xl lg:text-4xl font-bold text-[#1b1f3b] leading-tight mt-2">
             Amazing Collection <br /> and Variety
           </h2>
         </div>
 
-        {/* LOWER PART (moves DOWN) */}
+        {/* Lower Content */}
         <div
           className={`transition-all duration-500 ease-in-out
             ${
@@ -80,29 +91,38 @@ function Carousel() {
             }
           `}
         >
-          <p className="text-sm text-gray-600">
+          <p
+            className="
+              hidden sm:block
+              text-xs sm:text-sm text-gray-600 
+              max-w-[60%] 
+              sm:max-w-[50%] 
+              md:max-w-[45%] 
+              lg:max-w-[40%]
+            "
+          >
             Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do
             eiusmod tempor incididunt ut labore et dolore magna.
           </p>
 
-          <button className="mt-4 px-10 py-2 w-fit text-lg bg-gradient-to-r from-[#1b1f3b] via-[#23284f] to-[#1b1f3b] text-white">
+          <button className="mt-4 px-6 sm:px-8 py-2 text-sm sm:text-base bg-gradient-to-r from-[#1b1f3b] via-[#23284f] to-[#1b1f3b] text-white">
             Explore More →
           </button>
         </div>
       </div>
 
-      {/* ================= SLIDER BUTTONS ================= */}
-      <div className="absolute inset-0 z-20 flex items-center justify-between px-6">
+      {/* Slider Buttons */}
+      <div className="absolute inset-0 z-20 flex items-center justify-between px-3 sm:px-6">
         <button
           onClick={handleLeftSlider}
-          className="w-10 h-10 bg-[#1b1f3b] text-[#f9b17a] rounded-full border border-white/20 flex items-center justify-center hover:scale-110 transition"
+          className="w-7 h-7 sm:w-9 sm:h-9 bg-[#1b1f3b] text-[#f9b17a] rounded-full flex items-center justify-center hover:scale-110 transition"
         >
           ←
         </button>
 
         <button
           onClick={handleRightSlider}
-          className="w-10 h-10 bg-[#1b1f3b] text-[#f9b17a] rounded-full border border-white/20 flex items-center justify-center hover:scale-110 transition"
+          className="w-7 h-7 sm:w-9 sm:h-9 bg-[#1b1f3b] text-[#f9b17a] rounded-full flex items-center justify-center hover:scale-110 transition"
         >
           →
         </button>

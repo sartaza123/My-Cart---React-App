@@ -1,4 +1,3 @@
-// src/main.jsx
 import React, { Suspense, lazy } from "react";
 import { createRoot } from "react-dom/client";
 import { createBrowserRouter, RouterProvider } from "react-router-dom";
@@ -19,7 +18,6 @@ const About = lazy(() => import("./pages/About"));
 const Contact = lazy(() => import("./pages/Contact"));
 const Account = lazy(() => import("./pages/Account"));
 const Cart = lazy(() => import("./pages/Cart"));
-
 const Checkout = lazy(() => import("./components/Checkout"));
 const Search = lazy(() => import("./components/Search"));
 const Details = lazy(() => import("./components/ProductDetails"));
