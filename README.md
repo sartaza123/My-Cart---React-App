@@ -75,23 +75,52 @@ My-Cart---React-App-main
 ## 📁 Project Folder Structure
 
 ```
-My-Cart---React-App-main/
+my-cart-react-app/
 │
-├── public/                   # Static assets
+├── public/
+│   └── index.html
 │
 ├── src/
-│   ├── assets/               # Images & static files
-│   ├── components/           # Reusable UI components
-│   ├── pages/                # Application pages
-│   ├── hooks/                # Custom hooks (if any)
-│   ├── services/             # API services
-│   ├── redux/                # Redux store & slices (if used)
-│   ├── App.jsx               # Main App component
-│   └── main.jsx              # Entry file
+│   │
+│   ├── assets/
+│   │   └── img/                # Images and static assets
+│   │
+│   ├── components/             # Reusable UI Components
+│   │   ├── Carousel.jsx
+│   │   ├── Checkout.jsx
+│   │   ├── Error.jsx
+│   │   ├── Footer.jsx
+│   │   ├── Header.jsx
+│   │   ├── Loader.jsx
+│   │   ├── ProductCard.jsx
+│   │   ├── ProductDetails.jsx
+│   │   ├── ProductList.jsx
+│   │   ├── ScrollTop.jsx
+│   │   └── Search.jsx
+│   │
+│   ├── hooks/                  # Custom hooks & Redux logic
+│   │   ├── appStore.js
+│   │   ├── cartSlice.js
+│   │   ├── searchSlice.js
+│   │   └── useFetch.js
+│   │
+│   ├── Pages/                  # Application Pages
+│   │   ├── About.jsx
+│   │   ├── Account.jsx
+│   │   ├── Cart.jsx
+│   │   ├── Category.jsx
+│   │   ├── Contact.jsx
+│   │   └── Home.jsx
+│   │
+│   ├── App.jsx                 # Main App component
+│   ├── App.css                 # Global styles
+│   ├── index.css               # Base CSS
+│   └── main.jsx                # Entry point
 │
 ├── package.json
-├── vite.config.js
+├── vite.config.js (if using Vite)
 └── README.md
+
 ```
 
 ---
