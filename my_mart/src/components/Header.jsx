@@ -35,6 +35,30 @@ const Header = () => {
     inputRef.current.value = "";
   };
 
+  /* ================= NavLink Styles ================= */
+
+  const navLinkStylePrimary = ({ isActive }) =>
+    `
+  relative px-1 pb-1 text-sm font-medium tracking-wide
+  transition-colors duration-300
+  after:content-[''] after:absolute after:left-0 after:bottom-0
+  after:h-[2px] after:w-0 after:bg-[#f9b17a]
+  after:transition-all after:duration-300
+  hover:after:w-full
+  ${isActive ? "text-[#f9b17a] after:w-full" : "text-white/70 hover:text-white"}
+`;
+
+  const navLinkStyleSecondary = ({ isActive }) =>
+    `
+  relative px-1 pb-1 text-sm font-medium tracking-wide
+  transition-colors duration-300
+  after:content-[''] after:absolute after:left-0 after:bottom-0
+  after:h-[2px] after:w-0 after:bg-[#1b1f3b]
+  after:transition-all after:duration-300
+  hover:after:w-full
+  ${isActive ? "text-[#1b1f3b] after:w-full" : "text-white/90 hover:text-white"}
+`;
+
   const iconStyle =
     "relative text-white/70 hover:text-[#f9b17a] transition-all duration-300 hover:scale-110";
 
@@ -49,28 +73,25 @@ const Header = () => {
         `}
       >
         <div className="max-w-7xl mx-auto px-3 sm:px-6 md:px-10 lg:px-14 py-2 sm:py-3 flex items-center justify-between">
-          {/* Logo */}
           <h1 className="text-sm sm:text-base md:text-lg font-semibold text-white whitespace-nowrap">
             My<span className="text-[#f9b17a]">_</span>mart
           </h1>
 
-          {/* Nav */}
           <nav className="flex gap-3 sm:gap-6 text-[10px] sm:text-xs md:text-sm">
-            <NavLink to="/" className="text-white/70 hover:text-white">
+            <NavLink to="/" className={navLinkStylePrimary}>
               Home
             </NavLink>
-            <NavLink to="/category" className="text-white/70 hover:text-white">
+            <NavLink to="/category" className={navLinkStylePrimary}>
               Category
             </NavLink>
-            <NavLink to="/about" className="text-white/70 hover:text-white">
+            <NavLink to="/about" className={navLinkStylePrimary}>
               About
             </NavLink>
-            <NavLink to="/contact" className="text-white/70 hover:text-white">
+            <NavLink to="/contact" className={navLinkStylePrimary}>
               Contact
             </NavLink>
           </nav>
 
-          {/* Icons */}
           <div className="flex items-center gap-3 sm:gap-4">
             <NavLink to="/account" className={iconStyle}>
               <HiOutlineUser size={18} />
@@ -98,14 +119,11 @@ const Header = () => {
           <div className="max-w-7xl mx-auto px-3 sm:px-6 md:px-10 lg:px-14 py-3 bg-gradient-to-r from-[#1b1f3b] via-[#23284f] to-[#1b1f3b] border-b border-white/50">
             {/* ================= MOBILE ================= */}
             <div className="sm:hidden flex flex-col gap-3">
-              {/* Logo Row */}
               <h1 className="text-lg font-semibold tracking-wide text-white">
                 My<span className="text-[#f9b17a]">_</span>mart
               </h1>
 
-              {/* Search + Icons Row */}
               <div className="flex items-center gap-3">
-                {/* Search takes remaining width */}
                 <div className="flex flex-1 border border-[#f9b17a] h-8">
                   <input
                     ref={inputRef}
@@ -119,7 +137,6 @@ const Header = () => {
                   </button>
                 </div>
 
-                {/* Icons stay right */}
                 <div className="flex items-center gap-4">
                   <NavLink to="/account" className={iconStyle}>
                     <HiOutlineUser size={18} />
@@ -139,14 +156,11 @@ const Header = () => {
 
             {/* ================= DESKTOP & TABLET ================= */}
             <div className="hidden sm:flex items-center justify-between">
-              {/* LEFT SIDE → Logo */}
               <h1 className="text-2xl md:text-3xl font-semibold tracking-wide text-white whitespace-nowrap">
                 My<span className="text-[#f9b17a]">_</span>mart
               </h1>
 
-              {/* RIGHT SIDE → Search + Icons */}
               <div className="flex items-center gap-6 md:gap-8">
-                {/* Search */}
                 <div className="flex w-[240px] md:w-[300px] lg:w-[360px] border border-[#f9b17a] h-9 md:h-10">
                   <input
                     ref={inputRef}
@@ -160,7 +174,6 @@ const Header = () => {
                   </button>
                 </div>
 
-                {/* Account */}
                 <NavLink to="/account" className={iconStyle}>
                   <div className="flex flex-col items-center text-sm">
                     <HiOutlineUser size={22} />
@@ -168,7 +181,6 @@ const Header = () => {
                   </div>
                 </NavLink>
 
-                {/* Cart */}
                 <NavLink to="/cart" className={iconStyle}>
                   <div className="flex flex-col items-center text-sm">
                     <div className="relative">
@@ -187,10 +199,18 @@ const Header = () => {
           {/* ================= Secondary Nav ================= */}
           <div className="w-full bg-[#f9b17a] text-[#1b1f3b]">
             <nav className="flex justify-center md:justify-start mx-3 sm:mx-6 lg:mx-20 py-2 sm:py-3 gap-4 sm:gap-6 lg:gap-10 text-[10px] sm:text-xs md:text-sm">
-              <NavLink to="/">Home</NavLink>
-              <NavLink to="/category">Category</NavLink>
-              <NavLink to="/about">About Us</NavLink>
-              <NavLink to="/contact">Contact Us</NavLink>
+              <NavLink to="/" className={navLinkStyleSecondary}>
+                Home
+              </NavLink>
+              <NavLink to="/category" className={navLinkStyleSecondary}>
+                Category
+              </NavLink>
+              <NavLink to="/about" className={navLinkStyleSecondary}>
+                About Us
+              </NavLink>
+              <NavLink to="/contact" className={navLinkStyleSecondary}>
+                Contact Us
+              </NavLink>
             </nav>
           </div>
         </header>
