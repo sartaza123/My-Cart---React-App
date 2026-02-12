@@ -108,7 +108,7 @@ Follow the steps below:
 
 ```bash
 cd My-Cart---React-App-main
-cd My-Cart---React-App-main (again if needed)
+cd my_mart
 ```
 
 ### 2️⃣ Install Dependencies
