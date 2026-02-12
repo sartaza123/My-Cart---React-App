@@ -12,12 +12,12 @@ import appStore from "./hooks/appStore";
 
 /* ========= LAZY IMPORTS ========= */
 
-const Home = lazy(() => import("./pages/Home"));
-const Category = lazy(() => import("./pages/Category"));
-const About = lazy(() => import("./pages/About"));
-const Contact = lazy(() => import("./pages/Contact"));
-const Account = lazy(() => import("./pages/Account"));
-const Cart = lazy(() => import("./pages/Cart"));
+const Home = lazy(() => import("./Pages/Home"));
+const Category = lazy(() => import("./Pages/Category"));
+const About = lazy(() => import("./Pages/About"));
+const Contact = lazy(() => import("./Pages/Contact"));
+const Account = lazy(() => import("./Pages/Account"));
+const Cart = lazy(() => import("./Pages/Cart"));
 const Checkout = lazy(() => import("./components/Checkout"));
 const Search = lazy(() => import("./components/Search"));
 const Details = lazy(() => import("./components/ProductDetails"));
